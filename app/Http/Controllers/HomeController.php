@@ -28,8 +28,9 @@ class HomeController extends Controller
         $user = Auth::user();
         $data = array();
 
-        foreach ($user->notifications as $notification) {
+        foreach ($user->unreadNotifications as $notification) {
             $data[] =  $notification->data;
+            $notification->markAsRead();
         }
         if(count($data)>0){
             return view('home')->with(["data"=>$data]);
