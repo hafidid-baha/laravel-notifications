@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Notifications\Purchase;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -23,6 +25,22 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $user = Auth::user();
+        $data = array();
+
+        foreach ($user->notifications as $notification) {
+            $data[] =  $notification->data;
+        }
+        if(count($data)>0){
+            return view('home')->with(["data"=>$data]);
+        }
         return view('home');
+    }
+
+    public function sendDatabaseNotification(){
+        $user = Auth::user();
+        $user->notify(new Purchase());
+
+        return redirect()->back();
     }
 }

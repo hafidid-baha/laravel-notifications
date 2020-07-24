@@ -14,7 +14,15 @@
                         </div>
                     @endif
 
+                    @foreach ($data as $d)
+                        <div class="alert alert-primary" role="alert">
+                            {{ $d["msg"] }}
+                        </div>
+                    @endforeach
+
                     {{ __('You are logged in!') }}
+
+                    <a href="{{ route('notification.database') }}" class="btn btn-success d-block mt-3 mb-3">Create Database Notification</a>
                 </div>
             </div>
         </div>
