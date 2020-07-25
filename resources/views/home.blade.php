@@ -13,16 +13,21 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
-                    @foreach ($data as $d)
-                        <div class="alert alert-primary" role="alert">
-                            {{ $d["msg"] }}
-                        </div>
-                    @endforeach
+                    
+                    @isset($data)
+                        @foreach ($data as $d)
+                            <div class="alert alert-primary" role="alert">
+                                {{ $d["msg"] }}
+                            </div>
+                        @endforeach
+                    @endisset
+                    
 
                     {{ __('You are logged in!') }}
 
-                    <a href="{{ route('notification.database') }}" class="btn btn-success d-block mt-3 mb-3">Create Database Notification</a>
+                    <a href="{{ route('notification.database') }}" class="btn btn-success d-block mt-3 mb-3">Send Notifications</a>
+
+                    <small>this button well send all the notification specified inside via method</small>
                 </div>
             </div>
         </div>
